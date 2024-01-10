@@ -1,3 +1,5 @@
+import { Context } from '@/core/domain/interfaces/context.interface';
+
 export interface Executable {
-  execute(...params: unknown[]): Promise<unknown>;
+  execute(context: Context, ...params: unknown[]): Promise<unknown>;
 }

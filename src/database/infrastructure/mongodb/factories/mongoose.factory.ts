@@ -1,8 +1,8 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { MongooseOptionsFactory, MongooseModuleOptions } from '@nestjs/mongoose';
-import mongoose from 'mongoose';
+import { MongooseModuleOptions, MongooseOptionsFactory } from '@nestjs/mongoose';
 import { ConnectionString } from 'connection-string';
+import mongoose from 'mongoose';
 
 import { DatabaseConnection } from '@/core/infrastructure/types';
 import { MongooseConnectionFactory } from '@/database/infrastructure/mongodb/factories/mongoose-connection.factory';

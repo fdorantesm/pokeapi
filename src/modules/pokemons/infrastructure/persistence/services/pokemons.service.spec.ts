@@ -40,6 +40,15 @@ describe('PokemonsService', () => {
     expect(pokemon.getWeight()).toBe(65);
     expect(pokemon.getAbilities()).toHaveLength(1);
     expect(pokemon.getAbilities()[0].ability.name).toBe('rock-head');
+    expect(pokemon.getSprites()).toBeDefined();
+    expect(pokemon.getSprites()).toHaveProperty('frontDefault');
+    expect(pokemon.getSprites()).toHaveProperty('backDefault');
+    expect(pokemon.getSprites()).toHaveProperty('frontShiny');
+    expect(pokemon.getSprites()).toHaveProperty('backShiny');
+    expect(pokemon.getSprites()).toHaveProperty('frontFemale');
+    expect(pokemon.getSprites()).toHaveProperty('backFemale');
+    expect(pokemon.getSprites()).toHaveProperty('frontShinyFemale');
+    expect(pokemon.getSprites()).toHaveProperty('backShinyFemale');
   });
 
   it('should find a charmander', async () => {
@@ -64,6 +73,15 @@ describe('PokemonsService', () => {
     expect(charmander.getAbilities()).toHaveLength(2);
     expect(charmander.getAbility('blaze')).toBeTruthy();
     expect(charmander.getAbility('solar-power')).toBeTruthy();
+    expect(charmander.getSprites()).toBeDefined();
+    expect(charmander.getSprites()).toHaveProperty('frontDefault');
+    expect(charmander.getSprites()).toHaveProperty('backDefault');
+    expect(charmander.getSprites()).toHaveProperty('frontShiny');
+    expect(charmander.getSprites()).toHaveProperty('backShiny');
+    expect(charmander.getSprites()).toHaveProperty('frontFemale');
+    expect(charmander.getSprites()).toHaveProperty('backFemale');
+    expect(charmander.getSprites()).toHaveProperty('frontShinyFemale');
+    expect(charmander.getSprites()).toHaveProperty('backShinyFemale');
   });
 
   it('should return undefined when not found a psyduck', async () => {
@@ -83,6 +101,61 @@ describe('PokemonsService', () => {
       expect(pokemon.getStats()).toBeDefined();
       expect(pokemon.getSpecie()).toBeDefined();
       expect(pokemon.getAbilities()).toBeDefined();
+    });
+  });
+
+  it('should return a paginated list of pokemons', async () => {
+    await pokemonsService.createMany(pokemons);
+    const allPokemons = await pokemonsService.paginate(
+      {},
+      {
+        limit: 3,
+        skip: 0,
+      },
+    );
+    expect(allPokemons).toBeDefined();
+    expect(allPokemons).toHaveProperty('docs');
+    expect(allPokemons).toHaveProperty('limit');
+    expect(allPokemons).toHaveProperty('page');
+    expect(allPokemons).toHaveProperty('pages');
+    expect(allPokemons).toHaveProperty('total');
+    expect(allPokemons.docs).toHaveLength(3);
+    allPokemons.docs.map((pokemon) => {
+      expect(pokemon.getId()).toBeGreaterThan(0);
+      expect(pokemon.getName()).toBeDefined();
+      expect(pokemon.getTypes()).toBeDefined();
+      expect(pokemon.getStats()).toBeDefined();
+      expect(pokemon.getSpecie()).toBeDefined();
+      expect(pokemon.getAbilities()).toBeDefined();
+    });
+  });
+
+  it('should return a paginated list of fire pokemons', async () => {
+    await pokemonsService.createMany(pokemons);
+    const allPokemons = await pokemonsService.paginate(
+      {
+        'types.type.name': 'fire',
+      },
+      {
+        limit: 10,
+        skip: 0,
+      },
+    );
+    expect(allPokemons).toBeDefined();
+    expect(allPokemons).toHaveProperty('docs');
+    expect(allPokemons).toHaveProperty('limit');
+    expect(allPokemons).toHaveProperty('page');
+    expect(allPokemons).toHaveProperty('pages');
+    expect(allPokemons).toHaveProperty('total');
+    expect(allPokemons.docs).toHaveLength(3);
+    allPokemons.docs.map((pokemon) => {
+      expect(pokemon.getId()).toBeGreaterThan(0);
+      expect(pokemon.getName()).toBeDefined();
+      expect(pokemon.getTypes()).toBeDefined();
+      expect(pokemon.getStats()).toBeDefined();
+      expect(pokemon.getSpecie()).toBeDefined();
+      expect(pokemon.getAbilities()).toBeDefined();
+      expect(pokemon.isType('fire')).toBeTruthy();
     });
   });
 

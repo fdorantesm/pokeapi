@@ -1,5 +1,6 @@
 import { PokemonAbilityDto } from '@/modules/pokemons/infrastructure/http/dtos/pokemon-ability.dto';
 import { SpecieDto } from '@/modules/pokemons/infrastructure/http/dtos/specie.dto';
+import { SpritesDto } from '@/modules/pokemons/infrastructure/http/dtos/sprites.dto';
 import { StatsDto } from '@/modules/pokemons/infrastructure/http/dtos/stats.dto';
 import { TypesDto } from '@/modules/pokemons/infrastructure/http/dtos/types.dto';
 import { ApiProperty } from '@nestjs/swagger';
@@ -59,4 +60,10 @@ export class CreatePokemonDto {
   @IsArray()
   @ArrayMinSize(1)
   public readonly types: TypesDto[];
+
+  @ApiProperty()
+  @IsObject()
+  @ValidateNested({ each: true })
+  @Type(() => SpritesDto)
+  public readonly sprites: SpritesDto;
 }

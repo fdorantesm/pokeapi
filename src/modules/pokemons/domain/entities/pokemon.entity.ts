@@ -2,6 +2,7 @@ import { ResourceEntity } from '@/core/domain/resource-entity';
 import { PokemonAbility } from '@/modules/pokemons/domain/interfaces/pokemon-ability';
 import { Pokemon } from '@/modules/pokemons/domain/interfaces/pokemon.interface';
 import { Specie } from '@/modules/pokemons/domain/interfaces/specie.interface';
+import { Sprites } from '@/modules/pokemons/domain/interfaces/sprites.interface';
 import { Stats } from '@/modules/pokemons/domain/interfaces/stats.interface';
 import { Types } from '@/modules/pokemons/domain/interfaces/types.interface';
 
@@ -15,6 +16,7 @@ export class PokemonEntity extends ResourceEntity<Pokemon> {
   protected _types: Types[];
   protected _species: Specie;
   protected _abilities: PokemonAbility[];
+  protected _sprites: Sprites;
 
   constructor(data: Pokemon) {
     super(data);
@@ -27,6 +29,7 @@ export class PokemonEntity extends ResourceEntity<Pokemon> {
     this._types = data.types;
     this._species = data.species;
     this._abilities = data.abilities;
+    this._sprites = data.sprites;
   }
 
   public static create(data: Pokemon): PokemonEntity {
@@ -89,6 +92,10 @@ export class PokemonEntity extends ResourceEntity<Pokemon> {
     return this._abilities.find((ability) => ability.ability.name === name);
   }
 
+  public getSprites(): Sprites {
+    return this._sprites;
+  }
+
   public toObject(): Pokemon {
     return {
       id: this._id,
@@ -102,6 +109,7 @@ export class PokemonEntity extends ResourceEntity<Pokemon> {
       species: this._species,
       abilities: this._abilities,
       context: this._context,
+      sprites: this._sprites,
     };
   }
 
@@ -117,6 +125,7 @@ export class PokemonEntity extends ResourceEntity<Pokemon> {
       types: this._types,
       species: this._species,
       abilities: this._abilities,
+      sprites: this._sprites,
     };
   }
 }

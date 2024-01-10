@@ -7,5 +7,5 @@ export interface ResourceProps {
   deletedAt?: Date;
   isActive?: boolean;
   isDeleted?: boolean;
-  context: Context;
+  context?: Context;
 }

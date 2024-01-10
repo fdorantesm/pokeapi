@@ -3,6 +3,7 @@ import { ResourceDocument } from '@/core/infrastructure/models/resource-document
 import { Json } from '@/core/infrastructure/types';
 import { PokemonAbility } from '@/modules/pokemons/domain/interfaces/pokemon-ability';
 import { Specie } from '@/modules/pokemons/domain/interfaces/specie.interface';
+import { Sprites } from '@/modules/pokemons/domain/interfaces/sprites.interface';
 import { Stats } from '@/modules/pokemons/domain/interfaces/stats.interface';
 import { Types } from '@/modules/pokemons/domain/interfaces/types.interface';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
@@ -35,6 +36,9 @@ export class PokemonModel extends ResourceDocument {
 
   @Prop({ type: Array, index: true })
   public types: Types[];
+
+  @Prop({ type: Object })
+  public sprites: Sprites;
 
   @Prop({ type: Object })
   public context: Json;

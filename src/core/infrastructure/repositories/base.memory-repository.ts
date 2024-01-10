@@ -3,7 +3,9 @@ import { Injectable } from '@nestjs/common';
 
 import { Crud } from '@/core/domain/crud.interface';
 import { Entity } from '@/core/domain/entity';
+import { Pagination } from '@/core/domain/pagination';
 import { BaseRepositoryOptions } from '@/core/infrastructure/repositories/base.repository.options';
+import { QueryParsedOptions } from '@/core/types/general/query-parsed-options.type';
 
 @Injectable()
 export class BaseMemoryRepository<I, E extends Entity<I>> implements Crud<I, E> {
@@ -163,6 +165,31 @@ export class BaseMemoryRepository<I, E extends Entity<I>> implements Crud<I, E> 
     }
 
     return undefined;
+  }
+
+  public async paginate(
+    filter: Partial<I>,
+    options: QueryParsedOptions,
+  ): Promise<Pagination<E>> {
+    const total = await this.store.count(filter as I);
+    const docs = await this.store
+      .find(filter as I)
+      .skip(options.skip)
+      .limit(options.limit)
+      .sort(options.sort)
+      .exec()
+      .then((documents) => documents.map((document) => this.mapToEntity(document)));
+    const pages = Math.ceil(total / options.limit);
+    const page = Math.ceil(options.skip / options.limit) + 1;
+    const limit = options.limit;
+
+    return {
+      limit,
+      docs,
+      total,
+      pages,
+      page,
+    };
   }
 
   private mapToEntity(data: any): E {

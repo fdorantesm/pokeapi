@@ -58,7 +58,6 @@ export const cubone: Pokemon = {
     name: 'cubone',
     url: 'https://pokeapi.co/api/v2/pokemon-species/104/',
   },
-
   abilities: [
     {
       ability: {
@@ -69,6 +68,20 @@ export const cubone: Pokemon = {
       slot: 1,
     },
   ],
+  sprites: {
+    backDefault:
+      'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/104.png',
+    backFemale: null,
+    backShiny:
+      'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/shiny/104.png',
+    backShinyFemale: null,
+    frontDefault:
+      'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/104.png',
+    frontFemale: null,
+    frontShiny:
+      'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/104.png',
+    frontShinyFemale: null,
+  },
 };
 
 export const pokemons = [
@@ -128,6 +141,20 @@ export const pokemons = [
       { slot: 1, type: { name: 'grass', url: 'https://pokeapi.co/api/v2/type/12/' } },
       { slot: 2, type: { name: 'poison', url: 'https://pokeapi.co/api/v2/type/4/' } },
     ],
+    sprites: {
+      backDefault:
+        'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/1.png',
+      backFemale: null,
+      backShiny:
+        'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/shiny/1.png',
+      backShinyFemale: null,
+      frontDefault:
+        'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png',
+      frontFemale: null,
+      frontShiny:
+        'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/1.png',
+      frontShinyFemale: null,
+    },
   },
   {
     uuid: '0a2a0a0a-0a0a-0a0a-0a0a-0a0a0a0a0a0b',
@@ -185,6 +212,20 @@ export const pokemons = [
       { slot: 1, type: { name: 'grass', url: 'https://pokeapi.co/api/v2/type/12/' } },
       { slot: 2, type: { name: 'poison', url: 'https://pokeapi.co/api/v2/type/4/' } },
     ],
+    sprites: {
+      backDefault:
+        'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/2.png',
+      backFemale: null,
+      backShiny:
+        'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/shiny/2.png',
+      backShinyFemale: null,
+      frontDefault:
+        'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/2.png',
+      frontFemale: null,
+      frontShiny:
+        'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/2.png',
+      frontShinyFemale: null,
+    },
   },
   {
     uuid: '0a2a0a0a-0a0a-0a0a-0a0a-0a0a0a0a0a0c',
@@ -242,6 +283,20 @@ export const pokemons = [
       { slot: 1, type: { name: 'grass', url: 'https://pokeapi.co/api/v2/type/12/' } },
       { slot: 2, type: { name: 'poison', url: 'https://pokeapi.co/api/v2/type/4/' } },
     ],
+    sprites: {
+      backDefault:
+        'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/3.png',
+      backFemale: null,
+      backShiny:
+        'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/shiny/3.png',
+      backShinyFemale: null,
+      frontDefault:
+        'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/3.png',
+      frontFemale: null,
+      frontShiny:
+        'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/3.png',
+      frontShinyFemale: null,
+    },
   },
   {
     uuid: '0a2a0a0a-0a0a-0a0a-0a0a-0a0a0a0a0a0d',
@@ -296,6 +351,20 @@ export const pokemons = [
     ],
     species: { name: 'charmander', url: 'https://pokeapi.co/api/v2/pokemon-species/4/' },
     types: [{ slot: 1, type: { name: 'fire', url: 'https://pokeapi.co/api/v2/type/10/' } }],
+    sprites: {
+      backDefault:
+        'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/4.png',
+      backFemale: null,
+      backShiny:
+        'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/shiny/4.png',
+      backShinyFemale: null,
+      frontDefault:
+        'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png',
+      frontFemale: null,
+      frontShiny:
+        'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/4.png',
+      frontShinyFemale: null,
+    },
   },
   {
     uuid: '0a2a0a0a-0a0a-0a0a-0a0a-0a0a0a0a0a0e',
@@ -350,6 +419,20 @@ export const pokemons = [
     ],
     species: { name: 'charmeleon', url: 'https://pokeapi.co/api/v2/pokemon-species/5/' },
     types: [{ slot: 1, type: { name: 'fire', url: 'https://pokeapi.co/api/v2/type/10/' } }],
+    sprites: {
+      backDefault:
+        'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/5.png',
+      backFemale: null,
+      backShiny:
+        'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/shiny/5.png',
+      backShinyFemale: null,
+      frontDefault:
+        'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/5.png',
+      frontFemale: null,
+      frontShiny:
+        'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/5.png',
+      frontShinyFemale: null,
+    },
   },
   {
     uuid: '0a2a0a0a-0a0a-0a0a-0a0a-0a0a0a0a0a0f',
@@ -407,6 +490,20 @@ export const pokemons = [
       { slot: 1, type: { name: 'fire', url: 'https://pokeapi.co/api/v2/type/10/' } },
       { slot: 2, type: { name: 'flying', url: 'https://pokeapi.co/api/v2/type/3/' } },
     ],
+    sprites: {
+      backDefault:
+        'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/6.png',
+      backFemale: null,
+      backShiny:
+        'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/shiny/6.png',
+      backShinyFemale: null,
+      frontDefault:
+        'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/6.png',
+      frontFemale: null,
+      frontShiny:
+        'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/6.png',
+      frontShinyFemale: null,
+    },
   },
   {
     uuid: '0a2a0a0a-0a0a-0a0a-0a0a-0a0a0a0a0a10',
@@ -461,6 +558,20 @@ export const pokemons = [
     ],
     species: { name: 'squirtle', url: 'https://pokeapi.co/api/v2/pokemon-species/7/' },
     types: [{ slot: 1, type: { name: 'water', url: 'https://pokeapi.co/api/v2/type/11/' } }],
+    sprites: {
+      backDefault:
+        'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/7.png',
+      backFemale: null,
+      backShiny:
+        'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/shiny/7.png',
+      backShinyFemale: null,
+      frontDefault:
+        'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png',
+      frontFemale: null,
+      frontShiny:
+        'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/7.png',
+      frontShinyFemale: null,
+    },
   },
   {
     uuid: '0a2a0a0a-0a0a-0a0a-0a0a-0a0a0a0a0a11',
@@ -515,6 +626,20 @@ export const pokemons = [
     ],
     species: { name: 'wartortle', url: 'https://pokeapi.co/api/v2/pokemon-species/8/' },
     types: [{ slot: 1, type: { name: 'water', url: 'https://pokeapi.co/api/v2/type/11/' } }],
+    sprites: {
+      backDefault:
+        'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/8.png',
+      backFemale: null,
+      backShiny:
+        'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/shiny/8.png',
+      backShinyFemale: null,
+      frontDefault:
+        'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/8.png',
+      frontFemale: null,
+      frontShiny:
+        'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/8.png',
+      frontShinyFemale: null,
+    },
   },
   {
     uuid: '0a2a0a0a-0a0a-0a0a-0a0a-0a0a0a0a0a12',
@@ -569,6 +694,20 @@ export const pokemons = [
     ],
     species: { name: 'blastoise', url: 'https://pokeapi.co/api/v2/pokemon-species/9/' },
     types: [{ slot: 1, type: { name: 'water', url: 'https://pokeapi.co/api/v2/type/11/' } }],
+    sprites: {
+      backDefault:
+        'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/9.png',
+      backFemale: null,
+      backShiny:
+        'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/shiny/9.png',
+      backShinyFemale: null,
+      frontDefault:
+        'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/9.png',
+      frontFemale: null,
+      frontShiny:
+        'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/9.png',
+      frontShinyFemale: null,
+    },
   },
   {
     uuid: '0a2a0a0a-0a0a-0a0a-0a0a-0a0a0a0a0a13',
@@ -623,5 +762,19 @@ export const pokemons = [
     ],
     species: { name: 'caterpie', url: 'https://pokeapi.co/api/v2/pokemon-species/10/' },
     types: [{ slot: 1, type: { name: 'bug', url: 'https://pokeapi.co/api/v2/type/7/' } }],
+    sprites: {
+      backDefault:
+        'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/10.png',
+      backFemale: null,
+      backShiny:
+        'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/shiny/10.png',
+      backShinyFemale: null,
+      frontDefault:
+        'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10.png',
+      frontFemale: null,
+      frontShiny:
+        'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/10.png',
+      frontShinyFemale: null,
+    },
   },
 ];

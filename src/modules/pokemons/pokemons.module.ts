@@ -1,4 +1,6 @@
 import { CreatePokemonUseCase } from '@/modules/pokemons/application/use-cases/create-pokemon.use-case';
+import { GetPokemonUseCase } from '@/modules/pokemons/application/use-cases/get-pokemon.use-case';
+import { GetPokemonsUseCase } from '@/modules/pokemons/application/use-cases/get-pokemons.use-case';
 import { PokemonsController } from '@/modules/pokemons/infrastructure/http/controllers/pokemons.controller';
 import { PokemonsModel } from '@/modules/pokemons/infrastructure/persistence/mongodb/models/pokemon.model';
 import { PokemonsRepository } from '@/modules/pokemons/infrastructure/persistence/mongodb/repositories/pokemon.repository';
@@ -20,6 +22,8 @@ import { UuidModule } from 'nestjs-uuid';
       useClass: PokemonsService,
     },
     CreatePokemonUseCase,
+    GetPokemonUseCase,
+    GetPokemonsUseCase,
   ],
   controllers: [PokemonsController],
 })
