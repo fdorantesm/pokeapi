@@ -39,8 +39,8 @@ export class BaseRepository<I, E extends Entity<I>> implements Crud<I, E> {
     return rows.map((row) => this.mapToEntity(row.toJSON() as I));
   }
 
-  public async createMany?(roles: I[]): Promise<E[]> {
-    const rows = await this.model.create(roles);
+  public async createMany?(contract: I[]): Promise<E[]> {
+    const rows = await this.model.create(contract);
     return rows.map((row) => this.mapToEntity(row.toJSON() as I));
   }
 
@@ -52,6 +52,7 @@ export class BaseRepository<I, E extends Entity<I>> implements Crud<I, E> {
     }
 
     const row = await this.model.findOne(q).exec();
+
     if (row) {
       return this.mapToEntity(row.toJSON() as I);
     }

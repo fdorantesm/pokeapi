@@ -12,7 +12,7 @@ export class BaseService<I extends BaseProps, E extends Entity<I>> implements Cr
     return this.repository.findOne(filter);
   }
 
-  public find(filter: Partial<I>): Promise<E[]> {
+  public find(filter?: Partial<I>): Promise<E[]> {
     return this.repository.find(filter);
   }
 
@@ -20,7 +20,7 @@ export class BaseService<I extends BaseProps, E extends Entity<I>> implements Cr
     return this.repository.create(data);
   }
 
-  public async update(filter: Partial<I>, data: I): Promise<E> {
+  public async update(filter: Partial<I>, data: Partial<I>): Promise<E> {
     return this.repository.update(filter, data);
   }
 
@@ -36,8 +36,8 @@ export class BaseService<I extends BaseProps, E extends Entity<I>> implements Cr
     return this.repository.findManyByUuids(uuids);
   }
 
-  public async createMany(roles: I[]): Promise<E[]> {
-    return this.repository.createMany(roles);
+  public async createMany(contract: I[]): Promise<E[]> {
+    return this.repository.createMany(contract);
   }
 
   public async deleteMany(filter: Partial<I>): Promise<boolean> {

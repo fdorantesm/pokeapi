@@ -9,7 +9,7 @@ export interface Crud<I, E> {
   update(filter: Partial<I>, payload: Partial<I>): Promise<E>;
   delete(filter: Partial<I>): Promise<boolean>;
   findManyByUuids?(uuids: string[]): Promise<E[]>;
-  createMany?(roles: I[]): Promise<E[]>;
+  createMany?(contract: I[]): Promise<E[]>;
   deleteMany?(filter: Partial<I>): Promise<boolean>;
   count?(filter: Partial<I>): Promise<number>;
   softDelete?(filter: Partial<I>): Promise<boolean>;

@@ -4,6 +4,7 @@ import { DevtoolsModule } from '@nestjs/devtools-integration';
 import { CoreModule } from '@/core/core.module';
 import { DatabaseModule } from '@/database/database.module';
 import { HealthModule } from '@/modules/health/health.module';
+import { PokemonsModule } from '@/modules/pokemons/pokemons.module';
 import { SharedModule } from '@/modules/shared/shared.module';
 
 @Module({
@@ -15,6 +16,7 @@ import { SharedModule } from '@/modules/shared/shared.module';
     DatabaseModule,
     HealthModule,
     SharedModule,
+    PokemonsModule,
   ],
 })
 export class AppModule {}

@@ -1,5 +1,4 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
 
 import { DateService } from '@/modules/shared/infrastructure/vendors/luxon';
 import { TemplateService } from '@/modules/shared/infrastructure/vendors/pug';
