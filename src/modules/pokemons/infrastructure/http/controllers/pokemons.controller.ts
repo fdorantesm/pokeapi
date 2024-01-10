@@ -8,6 +8,7 @@ import { CreatePokemonUseCase } from '@/modules/pokemons/application/use-cases/c
 import { DeletePokemonUseCase } from '@/modules/pokemons/application/use-cases/delete-pokemon.use-case';
 import { GetPokemonUseCase } from '@/modules/pokemons/application/use-cases/get-pokemon.use-case';
 import { GetPokemonsUseCase } from '@/modules/pokemons/application/use-cases/get-pokemons.use-case';
+import { SyncPokemonsUseCase } from '@/modules/pokemons/application/use-cases/sync-pokemons.use-case';
 import { UpdatePokemonUseCase } from '@/modules/pokemons/application/use-cases/update-pokemon.use-case';
 import { PokemonJson } from '@/modules/pokemons/domain/interfaces/pokemon.json.interface';
 import { CreatePokemonDto } from '@/modules/pokemons/infrastructure/http/dtos/create-pokemon.dto';
@@ -22,6 +23,7 @@ export class PokemonsController {
     private readonly getPokemonsUseCase: GetPokemonsUseCase,
     private readonly updatePokemonUseCase: UpdatePokemonUseCase,
     private readonly deletePokemonUseCase: DeletePokemonUseCase,
+    private readonly syncPokemonsUseCase: SyncPokemonsUseCase,
   ) {}
 
   @Get('/')
@@ -64,5 +66,10 @@ export class PokemonsController {
     @Param('uuid') uuid: string,
   ): Promise<void> {
     return await this.deletePokemonUseCase.execute(context, uuid);
+  }
+
+  @Post('/sync')
+  public async syncPokemons(@Ctx() context: Context): Promise<void> {
+    return this.syncPokemonsUseCase.execute(context);
   }
 }
