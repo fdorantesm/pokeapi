@@ -13,7 +13,7 @@ export class PokemonEntity extends ResourceEntity<Pokemon> {
   protected _baseExperience: number;
   protected _stats: Stats[];
   protected _types: Types[];
-  protected _species: Specie[];
+  protected _species: Specie;
   protected _abilities: PokemonAbility[];
 
   constructor(data: Pokemon) {
@@ -73,12 +73,8 @@ export class PokemonEntity extends ResourceEntity<Pokemon> {
     return this._types.some((type) => type.type.name === name);
   }
 
-  public getSpecies(): Specie[] {
+  public getSpecie(): Specie {
     return this._species;
-  }
-
-  public getSpecie(name: string): Specie {
-    return this._species.find((specie) => specie.name === name);
   }
 
   public is(name: string): boolean {
@@ -93,9 +89,26 @@ export class PokemonEntity extends ResourceEntity<Pokemon> {
     return this._abilities.find((ability) => ability.ability.name === name);
   }
 
+  public toObject(): Pokemon {
+    return {
+      id: this._id,
+      uuid: this._uuid,
+      name: this._name,
+      height: this._height,
+      weight: this._weight,
+      baseExperience: this._baseExperience,
+      stats: this._stats,
+      types: this._types,
+      species: this._species,
+      abilities: this._abilities,
+      context: this._context,
+    };
+  }
+
   public toJson(): Partial<Pokemon> {
     return {
       id: this._id,
+      uuid: this._uuid,
       name: this._name,
       height: this._height,
       weight: this._weight,

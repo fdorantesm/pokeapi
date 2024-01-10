@@ -33,9 +33,8 @@ describe('PokemonsService', () => {
     expect(pokemon.getStat('special-attack').baseStat).toBe(40);
     expect(pokemon.getStat('special-defense').baseStat).toBe(50);
     expect(pokemon.getStat('speed').baseStat).toBe(35);
-    expect(pokemon.getSpecies()).toBeDefined();
-    expect(pokemon.getSpecies()).toHaveLength(1);
-    expect(pokemon.getSpecie('cubone')).toBeTruthy();
+    expect(pokemon.getSpecie()).toBeDefined();
+    expect(pokemon.getSpecie().name).toBe('cubone');
     expect(pokemon.getBaseExperience()).toBe(64);
     expect(pokemon.getHeight()).toBe(4);
     expect(pokemon.getWeight()).toBe(65);
@@ -57,9 +56,8 @@ describe('PokemonsService', () => {
     expect(charmander.getStat('special-attack').baseStat).toBe(60);
     expect(charmander.getStat('special-defense').baseStat).toBe(50);
     expect(charmander.getStat('speed').baseStat).toBe(65);
-    expect(charmander.getSpecies()).toBeDefined();
-    expect(charmander.getSpecies()).toHaveLength(1);
-    expect(charmander.getSpecie('charmander')).toBeTruthy();
+    expect(charmander.getSpecie()).toBeDefined();
+    expect(charmander.getSpecie().name).toBe('charmander');
     expect(charmander.getBaseExperience()).toBe(62);
     expect(charmander.getHeight()).toBe(6);
     expect(charmander.getWeight()).toBe(85);
@@ -83,7 +81,7 @@ describe('PokemonsService', () => {
       expect(pokemon.getName()).toBeDefined();
       expect(pokemon.getTypes()).toBeDefined();
       expect(pokemon.getStats()).toBeDefined();
-      expect(pokemon.getSpecies()).toBeDefined();
+      expect(pokemon.getSpecie()).toBeDefined();
       expect(pokemon.getAbilities()).toBeDefined();
     });
   });

@@ -54,12 +54,11 @@ export const cubone: Pokemon = {
       },
     },
   ],
-  species: [
-    {
-      name: 'cubone',
-      url: 'https://pokeapi.co/api/v2/pokemon-species/104/',
-    },
-  ],
+  species: {
+    name: 'cubone',
+    url: 'https://pokeapi.co/api/v2/pokemon-species/104/',
+  },
+
   abilities: [
     {
       ability: {
@@ -124,7 +123,7 @@ export const pokemons = [
         slot: 3,
       },
     ],
-    species: [{ name: 'bulbasaur', url: 'https://pokeapi.co/api/v2/pokemon-species/1/' }],
+    species: { name: 'bulbasaur', url: 'https://pokeapi.co/api/v2/pokemon-species/1/' },
     types: [
       { slot: 1, type: { name: 'grass', url: 'https://pokeapi.co/api/v2/type/12/' } },
       { slot: 2, type: { name: 'poison', url: 'https://pokeapi.co/api/v2/type/4/' } },
@@ -181,7 +180,7 @@ export const pokemons = [
         slot: 3,
       },
     ],
-    species: [{ name: 'ivysaur', url: 'https://pokeapi.co/api/v2/pokemon-species/2/' }],
+    species: { name: 'ivysaur', url: 'https://pokeapi.co/api/v2/pokemon-species/2/' },
     types: [
       { slot: 1, type: { name: 'grass', url: 'https://pokeapi.co/api/v2/type/12/' } },
       { slot: 2, type: { name: 'poison', url: 'https://pokeapi.co/api/v2/type/4/' } },
@@ -238,7 +237,7 @@ export const pokemons = [
         slot: 3,
       },
     ],
-    species: [{ name: 'venusaur', url: 'https://pokeapi.co/api/v2/pokemon-species/3/' }],
+    species: { name: 'venusaur', url: 'https://pokeapi.co/api/v2/pokemon-species/3/' },
     types: [
       { slot: 1, type: { name: 'grass', url: 'https://pokeapi.co/api/v2/type/12/' } },
       { slot: 2, type: { name: 'poison', url: 'https://pokeapi.co/api/v2/type/4/' } },
@@ -295,7 +294,7 @@ export const pokemons = [
         slot: 3,
       },
     ],
-    species: [{ name: 'charmander', url: 'https://pokeapi.co/api/v2/pokemon-species/4/' }],
+    species: { name: 'charmander', url: 'https://pokeapi.co/api/v2/pokemon-species/4/' },
     types: [{ slot: 1, type: { name: 'fire', url: 'https://pokeapi.co/api/v2/type/10/' } }],
   },
   {
@@ -349,7 +348,7 @@ export const pokemons = [
         slot: 3,
       },
     ],
-    species: [{ name: 'charmeleon', url: 'https://pokeapi.co/api/v2/pokemon-species/5/' }],
+    species: { name: 'charmeleon', url: 'https://pokeapi.co/api/v2/pokemon-species/5/' },
     types: [{ slot: 1, type: { name: 'fire', url: 'https://pokeapi.co/api/v2/type/10/' } }],
   },
   {
@@ -403,7 +402,7 @@ export const pokemons = [
         slot: 3,
       },
     ],
-    species: [{ name: 'charizard', url: 'https://pokeapi.co/api/v2/pokemon-species/6/' }],
+    species: { name: 'charizard', url: 'https://pokeapi.co/api/v2/pokemon-species/6/' },
     types: [
       { slot: 1, type: { name: 'fire', url: 'https://pokeapi.co/api/v2/type/10/' } },
       { slot: 2, type: { name: 'flying', url: 'https://pokeapi.co/api/v2/type/3/' } },
@@ -460,7 +459,7 @@ export const pokemons = [
         slot: 3,
       },
     ],
-    species: [{ name: 'squirtle', url: 'https://pokeapi.co/api/v2/pokemon-species/7/' }],
+    species: { name: 'squirtle', url: 'https://pokeapi.co/api/v2/pokemon-species/7/' },
     types: [{ slot: 1, type: { name: 'water', url: 'https://pokeapi.co/api/v2/type/11/' } }],
   },
   {
@@ -514,7 +513,7 @@ export const pokemons = [
         slot: 3,
       },
     ],
-    species: [{ name: 'wartortle', url: 'https://pokeapi.co/api/v2/pokemon-species/8/' }],
+    species: { name: 'wartortle', url: 'https://pokeapi.co/api/v2/pokemon-species/8/' },
     types: [{ slot: 1, type: { name: 'water', url: 'https://pokeapi.co/api/v2/type/11/' } }],
   },
   {
@@ -568,7 +567,7 @@ export const pokemons = [
         slot: 3,
       },
     ],
-    species: [{ name: 'blastoise', url: 'https://pokeapi.co/api/v2/pokemon-species/9/' }],
+    species: { name: 'blastoise', url: 'https://pokeapi.co/api/v2/pokemon-species/9/' },
     types: [{ slot: 1, type: { name: 'water', url: 'https://pokeapi.co/api/v2/type/11/' } }],
   },
   {
@@ -622,7 +621,7 @@ export const pokemons = [
         slot: 3,
       },
     ],
-    species: [{ name: 'caterpie', url: 'https://pokeapi.co/api/v2/pokemon-species/10/' }],
+    species: { name: 'caterpie', url: 'https://pokeapi.co/api/v2/pokemon-species/10/' },
     types: [{ slot: 1, type: { name: 'bug', url: 'https://pokeapi.co/api/v2/type/7/' } }],
   },
 ];

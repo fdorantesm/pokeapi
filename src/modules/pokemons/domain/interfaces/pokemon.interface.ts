@@ -5,13 +5,14 @@ import { Stats } from '@/modules/pokemons/domain/interfaces/stats.interface';
 import { Types } from '@/modules/pokemons/domain/interfaces/types.interface';
 
 export interface Pokemon extends ResourceProps {
+  uuid: string;
   id: number;
   name: string;
   height: number;
   weight: number;
   baseExperience: number;
   abilities: PokemonAbility[];
-  species: Specie[];
+  species: Specie;
   stats: Stats[];
   types: Types[];
 }

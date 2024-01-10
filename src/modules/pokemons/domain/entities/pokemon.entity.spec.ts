@@ -62,15 +62,15 @@ describe('PokemonEntity', () => {
 
   describe('PokemonEntity::getSpecies', () => {
     it('should be defined', () => {
-      expect(pokemon.getSpecies()).toBeDefined();
+      expect(pokemon.getSpecie()).toBeDefined();
     });
 
-    it('should be a array', () => {
-      expect(pokemon.getSpecies()).toBeInstanceOf(Array);
+    it('should be an object', () => {
+      expect(pokemon.getSpecie()).toBeInstanceOf(Object);
     });
 
     it('should be a array of Species', () => {
-      expect(pokemon.getSpecies()[0].name).toBe('cubone');
+      expect(pokemon.getSpecie().name).toBe('cubone');
     });
   });
 

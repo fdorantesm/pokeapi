@@ -1,4 +1,5 @@
 import { BaseEntity } from '@/core/domain/base-entity';
+import { Context } from '@/core/domain/interfaces/context.interface';
 import { ResourceProps } from '@/core/domain/interfaces/resource-props.interface';
 
 export abstract class ResourceEntity<T extends ResourceProps> extends BaseEntity<T> {
@@ -7,6 +8,7 @@ export abstract class ResourceEntity<T extends ResourceProps> extends BaseEntity
   protected _deletedAt: Date;
   protected _createdAt?: Date;
   protected _updatedAt?: Date;
+  protected _context: Context;
 
   protected constructor(data: T) {
     super(data);
@@ -17,6 +19,7 @@ export abstract class ResourceEntity<T extends ResourceProps> extends BaseEntity
     this._deletedAt = data.deletedAt;
     this._createdAt = data.createdAt;
     this._updatedAt = data.updatedAt;
+    this._context = data.context;
   }
 
   public get uuid(): string {
@@ -40,6 +43,10 @@ export abstract class ResourceEntity<T extends ResourceProps> extends BaseEntity
       createdAt: this._createdAt,
       updatedAt: this._updatedAt,
     };
+  }
+
+  public getContext(): Context {
+    return this._context;
   }
 }
 
