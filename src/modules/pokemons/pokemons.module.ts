@@ -1,4 +1,5 @@
 import { CreatePokemonUseCase } from '@/modules/pokemons/application/use-cases/create-pokemon.use-case';
+import { DeletePokemonUseCase } from '@/modules/pokemons/application/use-cases/delete-pokemon.use-case';
 import { GetPokemonUseCase } from '@/modules/pokemons/application/use-cases/get-pokemon.use-case';
 import { GetPokemonsUseCase } from '@/modules/pokemons/application/use-cases/get-pokemons.use-case';
 import { UpdatePokemonUseCase } from '@/modules/pokemons/application/use-cases/update-pokemon.use-case';
@@ -26,6 +27,7 @@ import { UuidModule } from 'nestjs-uuid';
     GetPokemonUseCase,
     GetPokemonsUseCase,
     UpdatePokemonUseCase,
+    DeletePokemonUseCase,
   ],
   controllers: [PokemonsController],
 })

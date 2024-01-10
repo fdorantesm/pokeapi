@@ -5,13 +5,14 @@ import { QueryParser } from '@/core/infrastructure/decorators/query-parser.decor
 import { Json } from '@/core/types/general/json.type';
 import { QueryParsedOptions } from '@/core/types/general/query-parsed-options.type';
 import { CreatePokemonUseCase } from '@/modules/pokemons/application/use-cases/create-pokemon.use-case';
+import { DeletePokemonUseCase } from '@/modules/pokemons/application/use-cases/delete-pokemon.use-case';
 import { GetPokemonUseCase } from '@/modules/pokemons/application/use-cases/get-pokemon.use-case';
 import { GetPokemonsUseCase } from '@/modules/pokemons/application/use-cases/get-pokemons.use-case';
 import { UpdatePokemonUseCase } from '@/modules/pokemons/application/use-cases/update-pokemon.use-case';
 import { PokemonJson } from '@/modules/pokemons/domain/interfaces/pokemon.json.interface';
 import { CreatePokemonDto } from '@/modules/pokemons/infrastructure/http/dtos/create-pokemon.dto';
 import { UpdatePokemonDto } from '@/modules/pokemons/infrastructure/http/dtos/update-pokemon.dto';
-import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
 
 @Controller({ path: 'pokemons', version: '1' })
 export class PokemonsController {
@@ -20,6 +21,7 @@ export class PokemonsController {
     private readonly getPokemonUseCase: GetPokemonUseCase,
     private readonly getPokemonsUseCase: GetPokemonsUseCase,
     private readonly updatePokemonUseCase: UpdatePokemonUseCase,
+    private readonly deletePokemonUseCase: DeletePokemonUseCase,
   ) {}
 
   @Get('/')
@@ -54,5 +56,13 @@ export class PokemonsController {
     @Body() data: UpdatePokemonDto,
   ): Promise<PokemonJson> {
     return await this.updatePokemonUseCase.execute(context, uuid, data);
+  }
+
+  @Delete('/:uuid')
+  public async deletePokemon(
+    @Ctx() context: Context,
+    @Param('uuid') uuid: string,
+  ): Promise<void> {
+    return await this.deletePokemonUseCase.execute(context, uuid);
   }
 }
