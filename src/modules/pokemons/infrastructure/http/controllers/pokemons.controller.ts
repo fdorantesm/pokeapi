@@ -7,9 +7,11 @@ import { QueryParsedOptions } from '@/core/types/general/query-parsed-options.ty
 import { CreatePokemonUseCase } from '@/modules/pokemons/application/use-cases/create-pokemon.use-case';
 import { GetPokemonUseCase } from '@/modules/pokemons/application/use-cases/get-pokemon.use-case';
 import { GetPokemonsUseCase } from '@/modules/pokemons/application/use-cases/get-pokemons.use-case';
+import { UpdatePokemonUseCase } from '@/modules/pokemons/application/use-cases/update-pokemon.use-case';
 import { PokemonJson } from '@/modules/pokemons/domain/interfaces/pokemon.json.interface';
 import { CreatePokemonDto } from '@/modules/pokemons/infrastructure/http/dtos/create-pokemon.dto';
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { UpdatePokemonDto } from '@/modules/pokemons/infrastructure/http/dtos/update-pokemon.dto';
+import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
 
 @Controller({ path: 'pokemons', version: '1' })
 export class PokemonsController {
@@ -17,6 +19,7 @@ export class PokemonsController {
     private readonly createPokemonUseCase: CreatePokemonUseCase,
     private readonly getPokemonUseCase: GetPokemonUseCase,
     private readonly getPokemonsUseCase: GetPokemonsUseCase,
+    private readonly updatePokemonUseCase: UpdatePokemonUseCase,
   ) {}
 
   @Get('/')
@@ -42,5 +45,14 @@ export class PokemonsController {
     @Ctx() context: Context,
   ): Promise<PokemonJson> {
     return await this.createPokemonUseCase.execute(context, pokemon);
+  }
+
+  @Patch('/:uuid')
+  public async updatePokemon(
+    @Ctx() context: Context,
+    @Param('uuid') uuid: string,
+    @Body() data: UpdatePokemonDto,
+  ): Promise<PokemonJson> {
+    return await this.updatePokemonUseCase.execute(context, uuid, data);
   }
 }
