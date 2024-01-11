@@ -1,4 +1,5 @@
 import { pokeApiConfigLoader } from '@/modules/pokemons/application/config/pokeapi.config';
+import { SyncDispatchedHandler } from '@/modules/pokemons/application/events/sync-dispatched.handler';
 import { CreatePokemonUseCase } from '@/modules/pokemons/application/use-cases/create-pokemon.use-case';
 import { DeletePokemonUseCase } from '@/modules/pokemons/application/use-cases/delete-pokemon.use-case';
 import { GetPokemonUseCase } from '@/modules/pokemons/application/use-cases/get-pokemon.use-case';
@@ -13,11 +14,13 @@ import { SharedModule } from '@/modules/shared/shared.module';
 import { HttpModule } from '@nestjs/axios';
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { CqrsModule } from '@nestjs/cqrs';
 import { MongooseModule } from '@nestjs/mongoose';
 import { UuidModule } from 'nestjs-uuid';
 
 @Module({
   imports: [
+    CqrsModule,
     MongooseModule.forFeature([PokemonsModel]),
     HttpModule.registerAsync({
       imports: [ConfigModule.forFeature(pokeApiConfigLoader)],
@@ -47,6 +50,7 @@ import { UuidModule } from 'nestjs-uuid';
     UpdatePokemonUseCase,
     DeletePokemonUseCase,
     SyncPokemonsUseCase,
+    SyncDispatchedHandler,
   ],
   controllers: [PokemonsController],
 })

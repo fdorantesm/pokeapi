@@ -1,4 +1,4 @@
-import { Resource } from '@/modules/pokemons/infrastructure/vendors/pokeapi/types/resource.type';
+import { Resource } from '@/modules/pokemons/application/types/resource.type';
 
 export type PokemonsList = {
   count: number;
