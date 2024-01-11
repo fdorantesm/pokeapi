@@ -7,6 +7,7 @@ import { QueryParsedOptions } from '@/core/types/general/query-parsed-options.ty
 import { CreatePokemonUseCase } from '@/modules/pokemons/application/use-cases/create-pokemon.use-case';
 import { DeleteAllPokemonsUseCase } from '@/modules/pokemons/application/use-cases/delete-all-pokemons.use-case';
 import { DeletePokemonUseCase } from '@/modules/pokemons/application/use-cases/delete-pokemon.use-case';
+import { GetPokemonPdfUseCase } from '@/modules/pokemons/application/use-cases/get-pokemon-pdf.use-case';
 import { GetPokemonUseCase } from '@/modules/pokemons/application/use-cases/get-pokemon.use-case';
 import { GetPokemonsUseCase } from '@/modules/pokemons/application/use-cases/get-pokemons.use-case';
 import { SyncPokemonsUseCase } from '@/modules/pokemons/application/use-cases/sync-pokemons.use-case';
@@ -14,7 +15,7 @@ import { UpdatePokemonUseCase } from '@/modules/pokemons/application/use-cases/u
 import { PokemonJson } from '@/modules/pokemons/domain/interfaces/pokemon.json.interface';
 import { CreatePokemonDto } from '@/modules/pokemons/infrastructure/http/dtos/create-pokemon.dto';
 import { UpdatePokemonDto } from '@/modules/pokemons/infrastructure/http/dtos/update-pokemon.dto';
-import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, Res } from '@nestjs/common';
 import {
   ApiBadRequestResponse,
   ApiBody,
@@ -28,6 +29,7 @@ import {
   ApiQuery,
   ApiTags,
 } from '@nestjs/swagger';
+import { Response } from 'express';
 
 @ApiTags('Pokemons')
 @Controller({ path: 'pokemons', version: '1' })
@@ -40,6 +42,7 @@ export class PokemonsController {
     private readonly deletePokemonUseCase: DeletePokemonUseCase,
     private readonly syncPokemonsUseCase: SyncPokemonsUseCase,
     private readonly deleteAllPokemonsUseCase: DeleteAllPokemonsUseCase,
+    private readonly getPokemonPdfUseCase: GetPokemonPdfUseCase,
   ) {}
 
   @ApiOperation({
@@ -76,6 +79,22 @@ export class PokemonsController {
     @Param('uuid') uuid: string,
   ): Promise<PokemonJson> {
     return await this.getPokemonUseCase.execute(context, uuid);
+  }
+
+  @ApiOperation({ summary: 'Get pokemon PDF by uuid' })
+  @ApiParam({ name: 'uuid', type: 'string', example: 'b8265dc6-f551-423e-8032-f33fc180f03e' })
+  @ApiOkResponse({ type: Object })
+  @ApiNotFoundResponse({ description: 'Pokemon not found' })
+  @Get('/:uuid/pdf')
+  public async getPokemonPdf(
+    @Ctx() context: Context,
+    @Param('uuid') uuid: string,
+    @Res() res: Response,
+  ) {
+    const pdf = await this.getPokemonPdfUseCase.execute(context, uuid);
+    res.setHeader('Content-Type', 'application/pdf');
+    res.setHeader('Content-Disposition', `inline; filename=${pdf.filename}`);
+    res.send(pdf.buffer);
   }
 
   @ApiOperation({ summary: 'Create pokemon' })
