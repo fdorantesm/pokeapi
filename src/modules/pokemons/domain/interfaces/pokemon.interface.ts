@@ -17,4 +17,5 @@ export interface Pokemon extends ResourceProps {
   stats: Stats[];
   types: Types[];
   sprites: Sprites;
+  order: number;
 }

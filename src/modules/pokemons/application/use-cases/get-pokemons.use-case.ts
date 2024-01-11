@@ -16,16 +16,26 @@ export class GetPokemonsUseCase implements Executable {
 
   public async execute(
     context: Context,
+    search: string,
     filter: Json,
     options: QueryParsedOptions,
   ): Promise<any> {
     Logger.log(`Getting pokemons`, context.requestId);
+    Logger.log({ search, filter, options }, context.requestId);
+
+    if (!options.sort) {
+      options.sort = 'name';
+    }
+
+    if (search) {
+      filter.name = { $regex: search, $options: 'i' };
+    }
 
     if (options.limit && options.skip !== undefined) {
       return this.pokemonsService.paginate(filter, options);
     }
 
-    const pokemons = await this.pokemonsService.find(filter);
+    const pokemons = await this.pokemonsService.find(filter, null, options);
 
     return pokemons.map((pokemon) => pokemon.toJson());
   }

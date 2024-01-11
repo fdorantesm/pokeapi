@@ -82,6 +82,7 @@ export const cubone: Pokemon = {
       'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/104.png',
     frontShinyFemale: null,
   },
+  order: 104,
 };
 
 export const pokemons = [
@@ -155,6 +156,7 @@ export const pokemons = [
         'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/1.png',
       frontShinyFemale: null,
     },
+    order: 1,
   },
   {
     uuid: '0a2a0a0a-0a0a-0a0a-0a0a-0a0a0a0a0a0b',
@@ -226,6 +228,7 @@ export const pokemons = [
         'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/2.png',
       frontShinyFemale: null,
     },
+    order: 2,
   },
   {
     uuid: '0a2a0a0a-0a0a-0a0a-0a0a-0a0a0a0a0a0c',
@@ -297,6 +300,7 @@ export const pokemons = [
         'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/3.png',
       frontShinyFemale: null,
     },
+    order: 3,
   },
   {
     uuid: '0a2a0a0a-0a0a-0a0a-0a0a-0a0a0a0a0a0d',
@@ -365,6 +369,7 @@ export const pokemons = [
         'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/4.png',
       frontShinyFemale: null,
     },
+    order: 4,
   },
   {
     uuid: '0a2a0a0a-0a0a-0a0a-0a0a-0a0a0a0a0a0e',
@@ -433,6 +438,7 @@ export const pokemons = [
         'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/5.png',
       frontShinyFemale: null,
     },
+    order: 5,
   },
   {
     uuid: '0a2a0a0a-0a0a-0a0a-0a0a-0a0a0a0a0a0f',
@@ -504,6 +510,7 @@ export const pokemons = [
         'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/6.png',
       frontShinyFemale: null,
     },
+    order: 6,
   },
   {
     uuid: '0a2a0a0a-0a0a-0a0a-0a0a-0a0a0a0a0a10',
@@ -572,6 +579,7 @@ export const pokemons = [
         'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/7.png',
       frontShinyFemale: null,
     },
+    order: 7,
   },
   {
     uuid: '0a2a0a0a-0a0a-0a0a-0a0a-0a0a0a0a0a11',
@@ -640,6 +648,7 @@ export const pokemons = [
         'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/8.png',
       frontShinyFemale: null,
     },
+    order: 8,
   },
   {
     uuid: '0a2a0a0a-0a0a-0a0a-0a0a-0a0a0a0a0a12',
@@ -708,6 +717,7 @@ export const pokemons = [
         'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/9.png',
       frontShinyFemale: null,
     },
+    order: 9,
   },
   {
     uuid: '0a2a0a0a-0a0a-0a0a-0a0a-0a0a0a0a0a13',
@@ -776,5 +786,6 @@ export const pokemons = [
         'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/10.png',
       frontShinyFemale: null,
     },
+    order: 10,
   },
 ];

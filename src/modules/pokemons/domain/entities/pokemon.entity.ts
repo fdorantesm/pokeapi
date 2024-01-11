@@ -17,6 +17,7 @@ export class PokemonEntity extends ResourceEntity<Pokemon> {
   protected _species: Specie;
   protected _abilities: PokemonAbility[];
   protected _sprites: Sprites;
+  protected _order: number;
 
   constructor(data: Pokemon) {
     super(data);
@@ -30,6 +31,7 @@ export class PokemonEntity extends ResourceEntity<Pokemon> {
     this._species = data.species;
     this._abilities = data.abilities;
     this._sprites = data.sprites;
+    this._order = data.order;
   }
 
   public static create(data: Pokemon): PokemonEntity {
@@ -96,6 +98,14 @@ export class PokemonEntity extends ResourceEntity<Pokemon> {
     return this._sprites;
   }
 
+  public getOrder(): number {
+    return this._order;
+  }
+
+  public seemsLike(name: string): boolean {
+    return this._name.match(new RegExp(name, 'i')) !== null;
+  }
+
   public toObject(): Pokemon {
     return {
       id: this._id,
@@ -110,6 +120,7 @@ export class PokemonEntity extends ResourceEntity<Pokemon> {
       abilities: this._abilities,
       context: this._context,
       sprites: this._sprites,
+      order: this._order,
     };
   }
 
@@ -126,6 +137,7 @@ export class PokemonEntity extends ResourceEntity<Pokemon> {
       species: this._species,
       abilities: this._abilities,
       sprites: this._sprites,
+      order: this._order,
     };
   }
 }

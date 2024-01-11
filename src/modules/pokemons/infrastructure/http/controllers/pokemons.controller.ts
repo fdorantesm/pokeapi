@@ -29,10 +29,11 @@ export class PokemonsController {
   @Get('/')
   public async getPokemons(
     @Ctx() context: Context,
+    @QueryParser('search') search: string,
     @QueryParser('filter') filter: Json,
     @QueryParser('options') options: QueryParsedOptions,
   ): Promise<Pagination<PokemonJson>> {
-    return await this.getPokemonsUseCase.execute(context, filter, options);
+    return await this.getPokemonsUseCase.execute(context, search, filter, options);
   }
 
   @Get('/:uuid')

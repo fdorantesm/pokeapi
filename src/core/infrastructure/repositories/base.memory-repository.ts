@@ -32,26 +32,44 @@ export class BaseMemoryRepository<I, E extends Entity<I>> implements Crud<I, E> 
     }
   }
 
-  public find(filter?: Partial<I>): Promise<E[]> {
+  public find(
+    filter?: Partial<I>,
+    projection?: any,
+    options?: QueryParsedOptions,
+  ): Promise<E[]> {
     const q = { ...filter } as any;
 
     if (this.options?.softDelete !== undefined) {
       q.isDeleted = this.options.softDelete;
     }
 
-    return this.store
-      .find(q)
+    const query = this.store.find(q, projection);
+
+    if (options?.sort) {
+      query.sort(options.sort);
+    }
+
+    if (options?.limit) {
+      query.limit(options.limit);
+    }
+
+    if (options?.skip) {
+      query.skip(options.skip);
+    }
+
+    return query
+      .exec()
       .then((documents) => documents.map((document) => this.mapToEntity(document)));
   }
 
-  public async findOne(filter?: Partial<I>): Promise<E> {
+  public async findOne(filter?: Partial<I>, projection?: any): Promise<E> {
     const q = { ...filter } as any;
 
     if (this.options?.softDelete !== undefined) {
       q.isDeleted = this.options.softDelete;
     }
 
-    const doc = await this.store.findOne(q);
+    const doc = await this.store.findOne(q, projection);
 
     if (doc) {
       return this.mapToEntity(doc);
@@ -60,32 +78,83 @@ export class BaseMemoryRepository<I, E extends Entity<I>> implements Crud<I, E> 
     return undefined;
   }
 
-  public findById(uuid: string): Promise<E> {
+  public findById(uuid: string, projection?: any): Promise<E> {
     return this.store
-      .findOne({ uuid, isDeleted: false })
+      .findOne({ uuid, isDeleted: false }, projection)
       .then((document) => this.mapToEntity(document));
   }
 
-  public trash(filter?: Partial<I>): Promise<E[]> {
+  public trash(
+    filter?: Partial<I>,
+    projection?: any,
+    options?: QueryParsedOptions,
+  ): Promise<E[]> {
     const q = { ...filter } as any;
 
     if (this.options?.softDelete !== undefined) {
       q.isDeleted = this.options.softDelete;
     }
 
-    return this.store
-      .find(q)
-      .then((documents) => documents.map((document) => this.mapToEntity(document)));
+    const query = this.store.find(q, projection);
+
+    if (options.sort) {
+      q.sort(options.sort);
+    }
+
+    if (options.limit) {
+      q.limit(options.limit);
+    }
+
+    if (options.skip) {
+      q.skip(options.skip);
+    }
+
+    return query.then((documents) => documents.map((document) => this.mapToEntity(document)));
   }
 
-  public all(filter?: Partial<I>): Promise<E[]> {
-    return this.store
-      .find(filter)
-      .then((documents) => documents.map((document) => this.mapToEntity(document)));
+  public all(
+    filter?: Partial<I>,
+    projection?: any,
+    options?: QueryParsedOptions,
+  ): Promise<E[]> {
+    const query = this.store.find(filter, projection);
+
+    if (options.sort) {
+      query.sort(options.sort);
+    }
+
+    if (options.limit) {
+      query.limit(options.limit);
+    }
+
+    if (options.skip) {
+      query.skip(options.skip);
+    }
+
+    return query.then((documents) => documents.map((document) => this.mapToEntity(document)));
   }
 
-  public scan(filter?: Partial<I>): Promise<E> {
-    return this.store.find(filter).then((document) => this.mapToEntity(document as I));
+  public async scan(
+    filter?: Partial<I>,
+    projection?: any,
+    options?: QueryParsedOptions,
+  ): Promise<E> {
+    const query = this.store.find(filter, projection);
+
+    if (options.sort) {
+      query.sort(options.sort);
+    }
+
+    if (options.limit) {
+      query.limit(options.limit);
+    }
+
+    if (options.skip) {
+      query.skip(options.skip);
+    }
+
+    const document = await query;
+    return this.mapToEntity(document as I);
   }
 
   public update(filter: Partial<I>, payload: Partial<I>): Promise<E> {
@@ -114,7 +183,7 @@ export class BaseMemoryRepository<I, E extends Entity<I>> implements Crud<I, E> 
     return this.store.remove(filter, { multi: true }).then((document) => !!document);
   }
 
-  public count(filter: Partial<I>): Promise<number> {
+  public count(filter?: Partial<I>): Promise<number> {
     return this.store.count(filter);
   }
 

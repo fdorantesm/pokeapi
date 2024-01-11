@@ -43,6 +43,7 @@ export class SyncDispatchedHandler implements IEventHandler<SyncDispatchedEvent>
             await this.pokemonsService.create({
               uuid,
               id: data.id,
+              order: data.order,
               name: data.name,
               height: data.height,
               weight: data.weight,

@@ -42,6 +42,9 @@ export class PokemonModel extends ResourceDocument {
 
   @Prop({ type: Object })
   public context: Json;
+
+  @Prop({ type: Number })
+  public order: number;
 }
 
 export const PokemonSchema = SchemaFactory.createForClass(PokemonModel);

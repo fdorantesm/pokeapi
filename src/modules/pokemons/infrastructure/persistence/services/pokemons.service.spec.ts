@@ -1,4 +1,5 @@
 import { cubone, pokemons } from '#/mocks/pokemons';
+import { Filter } from '@/core/domain/interfaces/filter.interface';
 import { PokemonsMemoryRepository } from '@/modules/pokemons/infrastructure/persistence/memory/repositories/pokemons.repository';
 import { PokemonsService } from '@/modules/pokemons/infrastructure/persistence/services/pokemons.service';
 import { Test } from '@nestjs/testing';
@@ -49,6 +50,7 @@ describe('PokemonsService', () => {
     expect(pokemon.getSprites()).toHaveProperty('backFemale');
     expect(pokemon.getSprites()).toHaveProperty('frontShinyFemale');
     expect(pokemon.getSprites()).toHaveProperty('backShinyFemale');
+    expect(pokemon.getOrder()).toBe(104);
   });
 
   it('should find a charmander', async () => {
@@ -82,6 +84,28 @@ describe('PokemonsService', () => {
     expect(charmander.getSprites()).toHaveProperty('backFemale');
     expect(charmander.getSprites()).toHaveProperty('frontShinyFemale');
     expect(charmander.getSprites()).toHaveProperty('backShinyFemale');
+    expect(charmander.getOrder()).toBe(4);
+  });
+
+  it(`should return an array of pokemons charmander family found by 'char'`, async () => {
+    await pokemonsService.createMany(pokemons);
+    const q = {
+      name: {
+        $regex: /char/,
+      },
+    };
+    const options = {
+      sort: { order: 1 },
+    };
+    const allPokemons = await pokemonsService.find(q as Filter<any>, {}, options);
+    expect(allPokemons).toBeDefined();
+    expect(allPokemons).toHaveLength(3);
+    expect(allPokemons.at(0).getId()).toBe(4);
+    expect(allPokemons.at(1).getId()).toBe(5);
+    expect(allPokemons.at(2).getId()).toBe(6);
+    allPokemons.map((pokemon) => {
+      expect(pokemon.seemsLike('char')).toBeTruthy();
+    });
   });
 
   it('should return undefined when not found a psyduck', async () => {
@@ -101,6 +125,8 @@ describe('PokemonsService', () => {
       expect(pokemon.getStats()).toBeDefined();
       expect(pokemon.getSpecie()).toBeDefined();
       expect(pokemon.getAbilities()).toBeDefined();
+      expect(pokemon.getSprites()).toBeDefined();
+      expect(pokemon.getOrder()).toBeGreaterThan(0);
     });
   });
 
@@ -127,7 +153,22 @@ describe('PokemonsService', () => {
       expect(pokemon.getStats()).toBeDefined();
       expect(pokemon.getSpecie()).toBeDefined();
       expect(pokemon.getAbilities()).toBeDefined();
+      expect(pokemon.getSprites()).toBeDefined();
+      expect(pokemon.getOrder()).toBeGreaterThan(0);
     });
+  });
+
+  it('should return a paginated list of pokemons sorted by name', async () => {
+    await pokemonsService.createMany(pokemons);
+    const allPokemons = await pokemonsService.paginate(
+      {},
+      {
+        limit: 10,
+        skip: 0,
+        sort: { name: 1 },
+      },
+    );
+    expect(allPokemons.docs.at(0).is('blastoise')).toBeTruthy();
   });
 
   it('should return a paginated list of fire pokemons', async () => {
@@ -156,6 +197,8 @@ describe('PokemonsService', () => {
       expect(pokemon.getSpecie()).toBeDefined();
       expect(pokemon.getAbilities()).toBeDefined();
       expect(pokemon.isType('fire')).toBeTruthy();
+      expect(pokemon.getSprites()).toBeDefined();
+      expect(pokemon.getOrder()).toBeGreaterThan(0);
     });
   });
 

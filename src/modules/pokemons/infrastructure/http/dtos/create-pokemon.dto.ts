@@ -8,6 +8,7 @@ import { Type } from 'class-transformer';
 import {
   ArrayMinSize,
   IsArray,
+  IsInt,
   IsObject,
   IsPositive,
   IsString,
@@ -66,4 +67,9 @@ export class CreatePokemonDto {
   @ValidateNested({ each: true })
   @Type(() => SpritesDto)
   public readonly sprites: SpritesDto;
+
+  @ApiProperty()
+  @IsPositive()
+  @IsInt()
+  public readonly order: number;
 }

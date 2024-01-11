@@ -1986,6 +1986,13 @@
     "@types/node" "*"
     mongoose "^6.3.0"
 
+"@types/nedb@^1.8.16":
+  version "1.8.16"
+  resolved "https://registry.yarnpkg.com/@types/nedb/-/nedb-1.8.16.tgz#7aed013d0ef46655c6aacf3af7a849a1980b821e"
+  integrity sha512-ND+uzwAZk7ZI9byOvHGOcZe2R9XUcLF698yDJKn00trFvh+GaemkX3gQKCSKtObjDpv8Uuou+k8v4x4scPr4TA==
+  dependencies:
+    "@types/node" "*"
+
 "@types/node@*":
   version "20.9.0"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-20.9.0.tgz#bfcdc230583aeb891cf51e73cfdaacdd8deae298"

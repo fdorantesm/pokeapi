@@ -86,5 +86,10 @@ describe('PokemonEntity', () => {
     it('should be a array of Abilities', () => {
       expect(pokemon.getAbilities()[0].ability.name).toBe('rock-head');
     });
+
+    it('should have an order property', () => {
+      expect(pokemon.getOrder()).toBeDefined();
+      expect(pokemon.getOrder()).toBe(cubone.order);
+    });
   });
 });
