@@ -1,13 +1,13 @@
 import {
+  CallHandler,
+  ExecutionContext,
   Injectable,
   NestInterceptor,
-  ExecutionContext,
-  CallHandler,
   StreamableFile,
 } from '@nestjs/common';
+import { type } from 'ramda';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { type } from 'ramda';
 
 export interface Response<T> {
   statusCode: number;
@@ -17,6 +17,7 @@ export interface Response<T> {
 @Injectable()
 export class TransformInterceptor<T> implements NestInterceptor<T, Response<T>> {
   intercept(context: ExecutionContext, next: CallHandler): Observable<Response<T> | any> {
+    const request = context.switchToHttp().getRequest();
     return next.handle().pipe(
       map((data?: any) => {
         if (data instanceof StreamableFile) {
@@ -24,6 +25,7 @@ export class TransformInterceptor<T> implements NestInterceptor<T, Response<T>> 
         }
 
         const response = context.switchToHttp().getResponse();
+        const requestId = request.requestId;
 
         if ([undefined].includes(data)) {
           response.status(204);
@@ -34,6 +36,7 @@ export class TransformInterceptor<T> implements NestInterceptor<T, Response<T>> 
         }
 
         return {
+          requestId,
           data,
           statusCode: context.switchToHttp().getResponse().statusCode,
           type: type(data),

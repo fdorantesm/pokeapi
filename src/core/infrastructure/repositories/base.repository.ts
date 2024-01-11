@@ -1,14 +1,17 @@
 import { Injectable } from '@nestjs/common';
-import { Model } from 'mongoose';
+import { PaginateModel, PaginateResult } from 'mongoose';
 
 import { Crud } from '@/core/domain/crud.interface';
 import { Entity } from '@/core/domain/entity';
+import { Filter } from '@/core/domain/interfaces/filter.interface';
 import { BaseRepositoryOptions } from '@/core/infrastructure/repositories/base.repository.options';
+import { Json } from '@/core/types/general/json.type';
+import { QueryParsedOptions } from '@/core/types/general/query-parsed-options.type';
 
 @Injectable()
 export class BaseRepository<I, E extends Entity<I>> implements Crud<I, E> {
   constructor(
-    private readonly model: Model<any>,
+    private readonly model: PaginateModel<any>,
     private readonly entityClass: new (data: I) => E,
     private options?: BaseRepositoryOptions,
   ) {
@@ -39,12 +42,12 @@ export class BaseRepository<I, E extends Entity<I>> implements Crud<I, E> {
     return rows.map((row) => this.mapToEntity(row.toJSON() as I));
   }
 
-  public async createMany?(roles: I[]): Promise<E[]> {
-    const rows = await this.model.create(roles);
+  public async createMany?(contract: I[]): Promise<E[]> {
+    const rows = await this.model.create(contract);
     return rows.map((row) => this.mapToEntity(row.toJSON() as I));
   }
 
-  public async findOne(filter: Partial<I>): Promise<E> {
+  public async findOne(filter: Filter<I>): Promise<E> {
     const q = { ...filter } as any;
 
     if (this.options?.softDelete !== undefined) {
@@ -52,6 +55,7 @@ export class BaseRepository<I, E extends Entity<I>> implements Crud<I, E> {
     }
 
     const row = await this.model.findOne(q).exec();
+
     if (row) {
       return this.mapToEntity(row.toJSON() as I);
     }
@@ -59,8 +63,12 @@ export class BaseRepository<I, E extends Entity<I>> implements Crud<I, E> {
     return undefined;
   }
 
-  public async scan(filter: Partial<I>): Promise<E> {
-    const row = await this.model.findOne({ ...filter } as I).exec();
+  public async scan(
+    filter: Filter<I>,
+    projection?: Json,
+    options?: QueryParsedOptions,
+  ): Promise<E> {
+    const row = await this.model.findOne({ ...filter } as I, projection, options).exec();
     if (row) {
       return this.mapToEntity(row.toJSON() as I);
     }
@@ -68,30 +76,42 @@ export class BaseRepository<I, E extends Entity<I>> implements Crud<I, E> {
     return undefined;
   }
 
-  public async trash(filter: Partial<I>): Promise<E[]> {
+  public async trash(
+    filter: Filter<I>,
+    projection?: Json,
+    options?: QueryParsedOptions,
+  ): Promise<E[]> {
     const q = { ...filter } as any;
 
     if (this.options?.softDelete !== undefined) {
       q.isDeleted = this.options.softDelete;
     }
 
-    const rows = await this.model.find(q as I).exec();
+    const rows = await this.model.find(q as I, projection, options).exec();
     return rows.map((row) => this.mapToEntity(row.toJSON() as I));
   }
 
-  public async all(filter?: Partial<I>): Promise<E[]> {
-    const rows = await this.model.find(filter as I).exec();
+  public async all(
+    filter?: Filter<I>,
+    projection?: Json,
+    options?: QueryParsedOptions,
+  ): Promise<E[]> {
+    const rows = await this.model.find(filter as I, projection, options).exec();
     return rows.map((row) => this.mapToEntity(row.toJSON() as I));
   }
 
-  public async find(filter?: Partial<I>): Promise<E[]> {
+  public async find(
+    filter?: Filter<I>,
+    projection?: Json,
+    options?: QueryParsedOptions,
+  ): Promise<E[]> {
     const q = { ...filter } as any;
 
     if (this.options?.softDelete !== undefined) {
       q.isDeleted = this.options.softDelete;
     }
 
-    const rows = await this.model.find(q as I).exec();
+    const rows = await this.model.find(q as I, projection, options).exec();
     return rows.map((row) => this.mapToEntity(row.toJSON() as I));
   }
 
@@ -102,7 +122,7 @@ export class BaseRepository<I, E extends Entity<I>> implements Crud<I, E> {
     }
   }
 
-  public async update(filter: Partial<I>, data: I): Promise<E> {
+  public async update(filter: Filter<I>, data: I): Promise<E> {
     const updated = await this.model
       .updateOne(filter as I, data)
       .exec()
@@ -115,21 +135,21 @@ export class BaseRepository<I, E extends Entity<I>> implements Crud<I, E> {
     return undefined;
   }
 
-  public async delete(filter: Partial<I>): Promise<boolean> {
+  public async delete(filter: Filter<I>): Promise<boolean> {
     const deleted = await this.model.deleteOne(filter as I).exec();
     return deleted.deletedCount > 0;
   }
 
-  public async deleteMany(filter: Partial<I>): Promise<boolean> {
+  public async deleteMany(filter: Filter<I>): Promise<boolean> {
     const deleted = await this.model.deleteMany(filter as I).exec();
     return deleted.deletedCount > 0;
   }
 
-  public async count(filter: Partial<I>): Promise<number> {
-    return this.model.countDocuments(filter as I).exec();
+  public async count(filter?: Filter<I>, options?: QueryParsedOptions): Promise<number> {
+    return this.model.countDocuments(filter as I, options).exec();
   }
 
-  public async softDelete(filter: Partial<I>): Promise<boolean> {
+  public async softDelete(filter: Filter<I>): Promise<boolean> {
     const deleted = await this.model
       .updateOne(filter as I, { deletedAt: new Date(), isDeleted: true })
       .exec();
@@ -137,7 +157,7 @@ export class BaseRepository<I, E extends Entity<I>> implements Crud<I, E> {
     return deleted.modifiedCount > 0;
   }
 
-  public async restore(filter: Partial<I>): Promise<E> {
+  public async restore(filter: Filter<I>): Promise<E> {
     const deleted = await this.model
       .updateOne(filter as I, { deletedAt: undefined, isDeleted: false })
       .exec();
@@ -149,7 +169,7 @@ export class BaseRepository<I, E extends Entity<I>> implements Crud<I, E> {
     return undefined;
   }
 
-  public async restoreMany(filter: Partial<I>): Promise<E[]> {
+  public async restoreMany(filter: Filter<I>): Promise<E[]> {
     const deleted = await this.model
       .updateMany(filter as I, { deletedAt: undefined, isDeleted: false })
       .exec();
@@ -161,7 +181,7 @@ export class BaseRepository<I, E extends Entity<I>> implements Crud<I, E> {
     return undefined;
   }
 
-  public async exists(filter: Partial<I>): Promise<boolean> {
+  public async exists(filter: Filter<I>): Promise<boolean> {
     const row = await this.model
       .findOne(filter as I)
       .select('uuid')
@@ -169,7 +189,7 @@ export class BaseRepository<I, E extends Entity<I>> implements Crud<I, E> {
     return Boolean(row);
   }
 
-  public async existsMany(filter: Partial<I>): Promise<string[]> {
+  public async existsMany(filter: Filter<I>): Promise<string[]> {
     const rows = await this.model
       .find(filter as I)
       .select('uuid')
@@ -193,5 +213,9 @@ export class BaseRepository<I, E extends Entity<I>> implements Crud<I, E> {
     }
 
     return undefined;
+  }
+
+  public async paginate(filter: Filter<I>, options: any): Promise<PaginateResult<E>> {
+    return this.model.paginate(filter as I, options);
   }
 }

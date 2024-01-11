@@ -19,6 +19,5 @@ WORKDIR /app
 
 COPY --from=build /src/dist/ /app
 COPY --from=build /src/node_modules ./node_modules
-COPY --from=build /src/static ./static
 
 ENTRYPOINT [ "node", "main.js" ]

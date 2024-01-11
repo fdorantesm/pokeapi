@@ -1,5 +1,6 @@
-import { ExceptionFilter, Catch, ArgumentsHost, HttpException, Logger } from '@nestjs/common';
-import { Request, Response } from 'express';
+import { Request } from '@/core/infrastructure/types/http/request.type';
+import { ArgumentsHost, Catch, ExceptionFilter, HttpException, Logger } from '@nestjs/common';
+import { Response } from 'express';
 import { StatusCodes, getReasonPhrase } from 'http-status-codes';
 
 @Catch(HttpException)
@@ -14,6 +15,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
     const path = request.url;
     const data = exceptionResponse?.data;
     const baseData = {
+      requestId: request.requestId,
       timestamp,
       path,
       data,
