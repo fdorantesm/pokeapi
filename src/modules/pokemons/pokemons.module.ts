@@ -1,6 +1,8 @@
 import { pokeApiConfigLoader } from '@/modules/pokemons/application/config/pokeapi.config';
+import { CleanDispatchedHandler } from '@/modules/pokemons/application/events/clean-dispatched.handler';
 import { SyncDispatchedHandler } from '@/modules/pokemons/application/events/sync-dispatched.handler';
 import { CreatePokemonUseCase } from '@/modules/pokemons/application/use-cases/create-pokemon.use-case';
+import { DeleteAllPokemonsUseCase } from '@/modules/pokemons/application/use-cases/delete-all-pokemons.use-case';
 import { DeletePokemonUseCase } from '@/modules/pokemons/application/use-cases/delete-pokemon.use-case';
 import { GetPokemonUseCase } from '@/modules/pokemons/application/use-cases/get-pokemon.use-case';
 import { GetPokemonsUseCase } from '@/modules/pokemons/application/use-cases/get-pokemons.use-case';
@@ -50,7 +52,9 @@ import { UuidModule } from 'nestjs-uuid';
     UpdatePokemonUseCase,
     DeletePokemonUseCase,
     SyncPokemonsUseCase,
+    DeleteAllPokemonsUseCase,
     SyncDispatchedHandler,
+    CleanDispatchedHandler,
   ],
   controllers: [PokemonsController],
 })

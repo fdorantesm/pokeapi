@@ -2,7 +2,7 @@ name: Test
 
 on:
   pull_request:
-    branches: ['main', 'develop']
+    branches: ['main', 'develop', 'release/*']
   push:
     branches: ['main', 'develop']
 
@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: ['18.13.0']
+        node-version: ['20.10.0']
     defaults:
       run:
         working-directory: .

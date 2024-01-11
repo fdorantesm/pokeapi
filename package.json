@@ -126,5 +126,8 @@
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": "eslint --fix"
+  },
+  "engines": {
+    "node": ">=20.10.0"
   }
 }

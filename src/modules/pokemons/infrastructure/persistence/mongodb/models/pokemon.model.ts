@@ -1,6 +1,6 @@
+import { Context } from '@/core/domain/interfaces/context.interface';
 import { ModelInstance } from '@/core/infrastructure/models/instance';
 import { ResourceDocument } from '@/core/infrastructure/models/resource-document';
-import { Json } from '@/core/infrastructure/types';
 import { PokemonAbility } from '@/modules/pokemons/domain/interfaces/pokemon-ability';
 import { Specie } from '@/modules/pokemons/domain/interfaces/specie.interface';
 import { Sprites } from '@/modules/pokemons/domain/interfaces/sprites.interface';
@@ -10,40 +10,40 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 
 @Schema({ collection: 'pokemons', timestamps: true, autoIndex: true })
 export class PokemonModel extends ResourceDocument {
-  @Prop({ unique: true, type: Number, index: true })
+  @Prop({ unique: true, type: Number, index: true, required: true })
   public id: number;
 
-  @Prop({ type: String, unique: true, index: true })
+  @Prop({ type: String, unique: true, index: true, required: true })
   public name: string;
 
-  @Prop({ type: Number })
+  @Prop({ type: Number, required: true })
   public height: number;
 
-  @Prop({ type: Number })
+  @Prop({ type: Number, required: true })
   public weight: number;
 
-  @Prop({ type: Number, index: true })
+  @Prop({ type: Number, index: true, required: true })
   public baseExperience: number;
 
-  @Prop({ type: Array })
+  @Prop({ type: Array, required: true })
   public abilities: PokemonAbility[];
 
-  @Prop({ type: Array, index: true })
+  @Prop({ type: Array, index: true, required: true })
   public species: Specie[];
 
-  @Prop({ type: Array })
+  @Prop({ type: Array, required: true })
   public stats: Stats[];
 
-  @Prop({ type: Array, index: true })
+  @Prop({ type: Array, index: true, required: true })
   public types: Types[];
 
-  @Prop({ type: Object })
+  @Prop({ type: Object, required: true })
   public sprites: Sprites;
 
-  @Prop({ type: Object })
-  public context: Json;
+  @Prop({ type: Object, index: true })
+  public context: Context;
 
-  @Prop({ type: Number })
+  @Prop({ type: Number, index: true, required: true })
   public order: number;
 }
 
