@@ -1,9 +1,10 @@
 import { Injectable } from '@nestjs/common';
-import { PaginateModel, PaginateResult } from 'mongoose';
+import { PaginateModel } from 'mongoose';
 
 import { Crud } from '@/core/domain/crud.interface';
 import { Entity } from '@/core/domain/entity';
 import { Filter } from '@/core/domain/interfaces/filter.interface';
+import { PaginatedResult } from '@/core/domain/paginated-result';
 import { BaseRepositoryOptions } from '@/core/infrastructure/repositories/base.repository.options';
 import { Json } from '@/core/types/general/json.type';
 import { QueryParsedOptions } from '@/core/types/general/query-parsed-options.type';
@@ -215,7 +216,7 @@ export class BaseRepository<I, E extends Entity<I>> implements Crud<I, E> {
     return undefined;
   }
 
-  public async paginate(filter: Filter<I>, options: any): Promise<PaginateResult<E>> {
+  public async paginate(filter: Filter<I>, options: any): Promise<PaginatedResult<E>> {
     return this.model.paginate(filter as I, options);
   }
 }
