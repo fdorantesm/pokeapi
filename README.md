@@ -1,5 +1,10 @@
 # PokeAPI
 
+[![npm](https://badge.fury.io/js/npm.svg)](https://badge.fury.io/js/npm)
+[![nodejs](https://img.shields.io/badge/node-v20.10.0-blue)](https://nodejs.org/en/download/)
+[![nestjs](https://img.shields.io/badge/nestjs-10.2.7-red)](https://nestjs.com/)
+[![GitHub license](https://img.shields.io/github/license/fdorantesm/pokeapi)](https://github.com/fdorantesm/pokeapi/blob/main/LICENSE)
+
 ## Introduction
 
 This service allows manage a pokedex database
@@ -12,19 +17,23 @@ Nest packages:
 
 - [ConfigModule](https://docs.nestjs.com/techniques/configuration)
 - [MongooseModule](https://docs.nestjs.com/techniques/mongodb)
+- [CqrsModule](https://docs.nestjs.com/recipes/cqrs)
+- [HttpModule](https://docs.nestjs.com/techniques/http-module)
+- [SwaggerModule](https://docs.nestjs.com/openapi/introduction)
 
 Other featured packages:
 
 - [Pug](https://pugjs.org)
 - [Lodash](https://lodash.com/)
 - [Luxon](https://moment.github.io/luxon/#/)
+- [Puppeteer](https://pptr.dev/)
 
 ## Requirements
 
-|         |      |
-|:--------|:----:|
-| NodeJS  | 20.0 |
-| MongoDB | 5.0  |
+|Technology |Version|
+|:----------|:-----:|
+| NodeJS    | 20.X  |
+| MongoDB   | 5.0   |
 
 Notes:
 
@@ -74,6 +83,12 @@ yarn bye
 |:---------|:------------------------------------------------------|
 | Swagger  | [View](http://localhost:6974/docs)                    |
 | Compodoc | [View](https://docs.nestjs.com/recipes/documentation) |
+| Live API | [View](https://pokeapi-8jv4.onrender.com)             |
+
+## Database population
+
+- `POST /v1/pokemons/sync` fetch all pokemons from pokeapi and save into the database.
+- `POST /v1/pokemons/clean` remove all pokemons from the database
 
 ## Testing
 

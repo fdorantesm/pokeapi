@@ -65,7 +65,7 @@ export class PokemonsController {
     @QueryParser('search') search: string,
     @QueryParser('filter') filter: Json,
     @QueryParser('options') options: QueryParsedOptions,
-  ): Promise<Pagination<PokemonJson>> {
+  ): Promise<Pagination<PokemonJson> | PokemonJson[]> {
     return await this.getPokemonsUseCase.execute(context, search, filter, options);
   }
 
