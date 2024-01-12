@@ -1,5 +1,10 @@
 # PokeAPI
 
+[![npm](https://badge.fury.io/js/npm.svg)](https://badge.fury.io/js/npm)
+[![nodejs](https://img.shields.io/badge/node-v20.10.0-blue)](https://nodejs.org/en/download/)
+[![nestjs](https://img.shields.io/badge/nestjs-10.2.7-red)](https://nestjs.com/)
+[![GitHub license](https://img.shields.io/github/license/fdorantesm/pokeapi)](https://github.com/fdorantesm/pokeapi/blob/main/LICENSE)
+
 ## Introduction
 
 This service allows manage a pokedex database
