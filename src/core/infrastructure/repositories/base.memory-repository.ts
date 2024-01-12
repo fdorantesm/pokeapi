@@ -53,8 +53,8 @@ export class BaseMemoryRepository<I, E extends Entity<I>> implements Crud<I, E> 
       query.limit(options.limit);
     }
 
-    if (options?.skip) {
-      query.skip(options.skip);
+    if (options?.offset) {
+      query.skip(options.offset);
     }
 
     return query
@@ -105,8 +105,8 @@ export class BaseMemoryRepository<I, E extends Entity<I>> implements Crud<I, E> 
       q.limit(options.limit);
     }
 
-    if (options.skip) {
-      q.skip(options.skip);
+    if (options.offset) {
+      q.skip(options.offset);
     }
 
     return query.then((documents) => documents.map((document) => this.mapToEntity(document)));
@@ -127,8 +127,8 @@ export class BaseMemoryRepository<I, E extends Entity<I>> implements Crud<I, E> 
       query.limit(options.limit);
     }
 
-    if (options.skip) {
-      query.skip(options.skip);
+    if (options.offset) {
+      query.skip(options.offset);
     }
 
     return query.then((documents) => documents.map((document) => this.mapToEntity(document)));
@@ -149,8 +149,8 @@ export class BaseMemoryRepository<I, E extends Entity<I>> implements Crud<I, E> 
       query.limit(options.limit);
     }
 
-    if (options.skip) {
-      query.skip(options.skip);
+    if (options.offset) {
+      query.skip(options.offset);
     }
 
     const document = await query;
@@ -243,13 +243,13 @@ export class BaseMemoryRepository<I, E extends Entity<I>> implements Crud<I, E> 
     const total = await this.store.count(filter as I);
     const docs = await this.store
       .find(filter as I)
-      .skip(options.skip)
+      .skip(options.offset)
       .limit(options.limit)
       .sort(options.sort)
       .exec()
       .then((documents) => documents.map((document) => this.mapToEntity(document)));
     const pages = Math.ceil(total / options.limit);
-    const page = Math.ceil(options.skip / options.limit) + 1;
+    const page = Math.ceil(options.offset / options.limit) + 1;
     const limit = options.limit;
 
     return {
@@ -258,6 +258,9 @@ export class BaseMemoryRepository<I, E extends Entity<I>> implements Crud<I, E> 
       total,
       pages,
       page,
+      offset: options.offset,
+      nextPage: page < pages ? page + 1 : null,
+      prevPage: page > 1 ? page - 1 : null,
     };
   }
 

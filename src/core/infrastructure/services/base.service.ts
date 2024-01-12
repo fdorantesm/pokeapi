@@ -4,7 +4,7 @@ import { Crud } from '@/core/domain/crud.interface';
 import { Entity } from '@/core/domain/entity';
 import { BaseProps } from '@/core/domain/interfaces/base-props.interface';
 import { Filter } from '@/core/domain/interfaces/filter.interface';
-import { Pagination } from '@/core/domain/pagination';
+import { PaginatedResult } from '@/core/domain/paginated-result';
 import { Json } from '@/core/types/general/json.type';
 import { QueryParsedOptions } from '@/core/types/general/query-parsed-options.type';
 
@@ -84,7 +84,7 @@ export class BaseService<I extends BaseProps, E extends Entity<I>> implements Cr
     return this.repository.existsByUuids(uuids);
   }
 
-  public async paginate(filter: Filter<I>, options: any): Promise<Pagination<E>> {
+  public async paginate(filter: Filter<I>, options: any): Promise<PaginatedResult<E>> {
     return this.repository.paginate(filter, options);
   }
 }

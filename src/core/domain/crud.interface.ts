@@ -1,5 +1,5 @@
 import { Filter } from '@/core/domain/interfaces/filter.interface';
-import { Pagination } from '@/core/domain/pagination';
+import { PaginatedResult } from '@/core/domain/paginated-result';
 import { Json } from '@/core/infrastructure/types';
 import { QueryParsedOptions } from '@/core/types/general/query-parsed-options.type';
 
@@ -23,5 +23,5 @@ export interface Crud<I, E> {
   exists?(filter: Filter<I>): Promise<boolean>;
   existsMany?(filter: Filter<I>): Promise<string[]>;
   existsByUuids?(uuids: string[]): Promise<string[]>;
-  paginate(filter: Filter<I>, options: QueryParsedOptions): Promise<Pagination<E>>;
+  paginate(filter: Filter<I>, options: QueryParsedOptions): Promise<PaginatedResult<E>>;
 }
