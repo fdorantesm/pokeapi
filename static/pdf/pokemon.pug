@@ -1,0 +1,30 @@
+extends layouts/default
+
+block head
+  style.
+    body {
+      background: #{pokemon.backgroundColor};
+      color: #{pokemon.textColor};
+    }
+
+block content
+  div(style="padding: 1rem")
+    div(style="display: flex; justify-content: space-between;")
+      h2(style="line-height: 0rem") #{pokemon.name}
+      h2(style="line-height: 0rem") ##{pokemon.id}
+    div(style="display: flex; justify-content: center;")
+      img(src=pokemon.sprites.frontDefault width="95%")
+    div(style="font-size: 12px; margin: 1rem 0; display: flex; justify-content: space-between;")
+      div(style="margin: 0.5rem 0") #{pokemon.types.map(type => type.type.name).join(', ')}
+      div(style="margin: 0.5rem 0") #{pokemon.height / 10} m / #{pokemon.weight / 10} kg
+
+    div(style="font-size: 12px; margin: 0.5rem 0;")
+      div(style="margin: 0.5rem 0;")
+        table(style="width: 100%;")
+          tr
+            each i in pokemon.stats
+              td(style=`width: 25px;padding: 5px; border: 1px solid ${pokemon.textColor};`)
+                div(style="height: 25px; font-size: 9px;") #{i.stat.name}
+                div(style="font-size: 14px") #{i.baseStat}/#{i.effort}
+    div(style="font-size: 10px; margin-top: 0.5rem;")
+      em #{context.requestId}
