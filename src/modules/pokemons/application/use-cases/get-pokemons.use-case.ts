@@ -47,6 +47,7 @@ export class GetPokemonsUseCase implements Executable {
         prevPage: prevPage,
         nextPage: nextPage,
         offset: result.offset,
+        hasMore: result.page < result.pages,
       };
     }
 

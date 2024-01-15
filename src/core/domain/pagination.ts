@@ -7,4 +7,5 @@ export interface Pagination<T> {
   offset?: number | undefined;
   nextPage: number | null;
   prevPage: number | null;
+  hasMore: boolean;
 }

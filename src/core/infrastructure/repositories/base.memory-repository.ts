@@ -261,6 +261,7 @@ export class BaseMemoryRepository<I, E extends Entity<I>> implements Crud<I, E> 
       offset: options.offset,
       nextPage: page < pages ? page + 1 : null,
       prevPage: page > 1 ? page - 1 : null,
+      hasMore: page < pages,
     };
   }
 
